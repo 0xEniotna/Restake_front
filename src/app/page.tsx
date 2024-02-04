@@ -1,6 +1,6 @@
 'use client';
 
-import Cyberpunk from 'public/cyberpunk.jpg';
+import Cyberpunk from '../../public/cyberpunk.jpg';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Nimbora from '@/components/Nimbora';
