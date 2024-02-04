@@ -1,6 +1,4 @@
 'use client';
-import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
-import { useMemo } from 'react';
 
 export default function Nimbora() {
   return (
@@ -12,7 +10,7 @@ export default function Nimbora() {
         </a>
       </div>
       <div className="flex text-3xl ml-36">
-        Starknet's DeFi Pooling protocol
+        Starknet&apos;s DeFi Pooling protocol
       </div>
     </div>
   );

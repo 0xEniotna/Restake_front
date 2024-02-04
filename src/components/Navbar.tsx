@@ -62,13 +62,27 @@ function ConnectWallet() {
     </div>
   );
 }
-
 function WalletModal() {
+  const showModal = () => {
+    const modal = document.getElementById('my_modal');
+    if (modal instanceof HTMLDialogElement) {
+      modal.showModal();
+    } else {
+      console.error('The modal element was not found');
+    }
+  };
+  const closeModal = () => {
+    const modal = document.getElementById('my_modal');
+    if (modal instanceof HTMLDialogElement) {
+      modal.close();
+    }
+  };
+
   return (
     <div>
       <button
         className="btn bg-primary text-xl w-32 hover:bg-secondary hover:text-primary text-secondary"
-        onClick={() => document.getElementById('my_modal').showModal()}
+        onClick={showModal}
       >
         Connect
       </button>
@@ -77,12 +91,15 @@ function WalletModal() {
           <ConnectWallet />
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button>close</button>
+          <button type="button" onClick={() => closeModal()}>
+            close
+          </button>
         </form>
       </dialog>
     </div>
   );
 }
+
 export default function Navbar() {
   const { address } = useAccount();
 
