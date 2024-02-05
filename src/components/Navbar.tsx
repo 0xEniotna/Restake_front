@@ -1,6 +1,8 @@
 'use client';
 import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
+import Link from 'next/link';
 import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 
 function WalletConnected() {
   const { address } = useAccount();
@@ -102,14 +104,31 @@ function WalletModal() {
 
 export default function Navbar() {
   const { address } = useAccount();
+  const router = useRouter();
 
   return (
-    <div className="navbar z-1 backdrop-blur-md h-18">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-5xl">ReSta(r)ke</a>
+    <div className="navbar backdrop-blur-md h-18">
+      <div className="navbar-start">
+        <div className="flex-1">
+          <Link href="/" className="btn btn-ghost text-5xl">
+            ReSta(r)ke
+          </Link>
+        </div>
       </div>
-      <div className="flex-none mr-6">
-        {address ? <WalletConnected /> : <WalletModal />}
+      <div className="navbar-center  lg:flex">
+        <ul className="menu menu-horizontal px-1 text-xl">
+          <li>
+            <Link href="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link href="/markets">Markets</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <div className="flex-none mr-6">
+          {address ? <WalletConnected /> : <WalletModal />}
+        </div>
       </div>
     </div>
   );

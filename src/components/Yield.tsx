@@ -73,7 +73,7 @@ export default function Yield() {
   const subTitleStyle = 'text-5xl font-extrabold text-left font-roboto ml-4';
 
   return (
-    <div className="z-40 w-3/4 ">
+    <div className="w-3/4 ">
       <div className="flex flex-col  justify-center text-center">
         <div className="hero h-screen">
           <div className="hero-content text-center">
@@ -82,9 +82,7 @@ export default function Yield() {
                 Access juicy L1 restaking yield from Starknet
               </h1>
               <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                assumenda excepturi exercitationem quasi. In deleniti eaque aut
-                repudiandae et a id nisi.
+                Deposit ETH and invest in your favourite restaking protocols.
               </p>
               <button
                 className="btn bg-primary hover:bg-secondary hover:text-primary text-secondary"

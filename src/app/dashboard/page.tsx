@@ -1,12 +1,10 @@
 'use client';
 
-import Cyberpunk from '../../public/cyberpunk.jpg';
+import Cyberpunk from '../../../public/cyberpunk.jpg';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
-import Nimbora from '@/components/Nimbora';
-import Yield from '@/components/Yield';
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen gap-12">
       <Image
@@ -22,11 +20,9 @@ export default function Home() {
           opacity: 0.6,
         }}
       />
-      <div className="absolute z-20 top-0 w-full">
+      <div className="absolute top-0 w-full">
         <Navbar />
       </div>
-      <Yield />
-      <Nimbora />
     </main>
   );
 }
