@@ -7,7 +7,6 @@ import {
 } from '@starknet-react/core';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 function WalletConnected() {
   const { address } = useAccount();
@@ -18,11 +17,16 @@ function WalletConnected() {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }, [address]);
 
+  const handleDisconnect = () => {
+    disconnect();
+    localStorage.removeItem('lastConnector');
+  };
+
   return (
     <div className="tooltip tooltip-bottom" data-tip="Disconnect">
       <button
         className="btn flex flex-row items-center"
-        onClick={() => disconnect()}
+        onClick={() => handleDisconnect()}
       >
         <div className="flex flex-row items-center gap-2 text-xl">
           <svg
@@ -51,24 +55,17 @@ function WalletConnected() {
 
 function ConnectWallet() {
   const { connectors, connect } = useConnect();
-  const { address, isConnecting } = useAccount();
   const [error, setError] = useState('');
 
-  // Save to local storage when address changes
-  useEffect(() => {
-    if (address) {
-      localStorage.setItem('connectedAddress', address);
-    }
-  }, [address]);
+  const { address, isConnecting } = useAccount();
 
   const handleConnect = (connector: Connector) => {
     setError('');
 
     try {
       connect({ connector });
-      // Additional logic for successful connection
+      localStorage.setItem('lastConnector', connector.id);
     } catch (error: any) {
-      // Handle errors
       setError('Failed to connect: ' + error.message);
     }
   };
@@ -107,6 +104,16 @@ export function WalletModal() {
       modal.close();
     }
   };
+  const { connectors, connect } = useConnect();
+
+  useEffect(() => {
+    const lastConnectorId = localStorage.getItem('lastConnector');
+    const lastConnector = connectors.find((c) => c.id === lastConnectorId);
+
+    if (lastConnector) {
+      connect({ connector: lastConnector });
+    }
+  }, [connect, connectors]);
 
   return (
     <div>

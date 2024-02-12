@@ -1,8 +1,14 @@
 'use client';
-import { useAccount, useContractWrite } from '@starknet-react/core';
+import {
+  useAccount,
+  useContractRead,
+  useContractWrite,
+} from '@starknet-react/core';
 import { CallData, cairo, Call } from 'starknet';
 import { useEffect, useMemo, useState } from 'react';
 import { ethers } from 'ethers';
+
+import compiledContract from './abis/nimbora_yields_TokenManager.contract_class.json';
 
 export type withdrawProps = {
   shareToken: string;
@@ -39,7 +45,7 @@ const usePrepareCalls = (
   return calls;
 };
 
-export default function useWithdraw(params: withdrawProps) {
+export function useWithdraw(params: withdrawProps) {
   const { address } = useAccount();
   const [formattedNumber, setFormattedNumber] = useState('');
 
@@ -55,6 +61,66 @@ export default function useWithdraw(params: withdrawProps) {
     params.shareToken as string,
     formattedNumber
   );
+
+  const { writeAsync, data, isPending } = useContractWrite({
+    calls,
+  });
+
+  return { writeAsync, data, isPending };
+}
+
+export function usePendingRequests(params: withdrawProps) {
+  const { address } = useAccount();
+  const [withdrawLen, setWithdrawLen] = useState('');
+
+  const { data: withdrawLenData, isLoading: isPendingWithdrawLen } =
+    useContractRead({
+      functionName: 'user_withdrawal_len',
+      args: [address as string],
+      abi: compiledContract.abi,
+      address: params.stratAddress,
+      watch: true,
+    });
+
+  useEffect(() => {
+    if (withdrawLenData !== undefined) {
+      setWithdrawLen(withdrawLenData.toString());
+    }
+  }, [withdrawLenData]);
+
+  const args = withdrawLen ? [address as string, withdrawLen] : [];
+  // console.log('args:', args);
+
+  const { data: userInfoData, isLoading: isUserInfoLoading } = useContractRead({
+    functionName: 'withdrawal_info',
+    args: args,
+    abi: compiledContract.abi,
+    address: params.stratAddress,
+    watch: true,
+  });
+
+  return { userInfoData, isUserInfoLoading };
+}
+
+export function useClaimWithdrawal(params: withdrawProps) {
+  const { address } = useAccount();
+  const [formattedNumber, setFormattedNumber] = useState('');
+
+  useEffect(() => {
+    const safeAmount = params.amount === '' ? '0' : params.amount;
+    const number = ethers.parseUnits(safeAmount, 'ether').toString();
+    setFormattedNumber(number);
+  }, [params, formattedNumber]);
+
+  const calls: Call[] = [
+    {
+      contractAddress: params.stratAddress,
+      entrypoint: 'claim_withdrawal',
+      calldata: CallData.compile({
+        id: cairo.uint256(formattedNumber),
+      }),
+    },
+  ];
 
   const { writeAsync, data, isPending } = useContractWrite({
     calls,

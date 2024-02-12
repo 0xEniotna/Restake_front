@@ -104,7 +104,7 @@ export default function Yield() {
           <button
             type="button"
             onClick={() => router.push('/strategies/combo')}
-            className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+            className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3 "
             disabled
           >
             <div className={subTitleStyle}>Combo Juice 🤝</div>

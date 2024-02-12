@@ -1,5 +1,9 @@
 import useUserPosition from '@/hooks/UserPosition';
-import useWithdraw, { withdrawProps } from '@/hooks/Withdraw';
+import {
+  usePendingRequests,
+  useWithdraw,
+  withdrawProps,
+} from '@/hooks/Withdraw';
 import { useAccount, useBalance } from '@starknet-react/core';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
@@ -10,6 +14,34 @@ export type withdrawModalProps = {
   userBalance: string;
   isBalanceLoading: boolean;
 };
+
+function renderUserInfoData(userInfoData: any) {
+  if (!userInfoData) return null;
+
+  const { shares, claimed } = userInfoData;
+
+  const handleWithdraw = async () => {};
+  return (
+    <div className="flex flex-row w-full">
+      <div className="flex flex-col w-1/2">
+        <div className="uppercase  text-sm  font-semibold text-secondary">
+          Shares
+        </div>
+        <p className="block mt-1 text-lg  font-medium text-white">
+          {`${ethers.formatEther(shares.toString()).toString()} NIM-EETH`}
+        </p>
+      </div>
+
+      <button
+        className="btn text-black text-xl font-bold rounded w-1/2"
+        onClick={handleWithdraw}
+        // disabled
+      >
+        Claim assets
+      </button>
+    </div>
+  );
+}
 
 export function WithdrawModal(withdrawProps: withdrawModalProps) {
   const [amount, setAmount] = useState('0');
@@ -45,6 +77,12 @@ export function WithdrawModal(withdrawProps: withdrawModalProps) {
     writeAsync();
   };
 
+  const { userInfoData, isUserInfoLoading } = usePendingRequests({
+    shareToken: withdrawProps.shareToken,
+    stratAddress: withdrawProps.stratAddress,
+    amount: amount,
+  });
+
   return (
     <>
       <button className="btn  text-xl w-1/3 " onClick={showModal}>
@@ -60,7 +98,13 @@ export function WithdrawModal(withdrawProps: withdrawModalProps) {
           </div>
           <div className="divider divider-primary w-3/4 m-auto"></div>
           <div className="text-xl mb-3 text-primary">My pending requests</div>
-
+          <div className="flex flex-row justify-between mb-2">
+            {isUserInfoLoading ? (
+              <span className="loading loading-spinner text-primary"></span>
+            ) : (
+              renderUserInfoData(userInfoData)
+            )}
+          </div>
           <div className="divider divider-primary w-3/4 m-auto"></div>
           <div className="text-xl mb-3 text-primary">New withdrawal</div>
 

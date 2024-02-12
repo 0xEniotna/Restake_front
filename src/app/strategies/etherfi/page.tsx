@@ -119,7 +119,9 @@ function StratDetails(strat: Strat) {
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
-              EtherFi&apos;s eETH.
+              EtherFi&apos;s eETH. Holding eETH makes you earn restaking native
+              APR and additional rewards such as EtherFi loyalty points or
+              EigenLayer Points.
             </div>
           </div>
           <div className="w-1/2">
