@@ -1,24 +1,19 @@
 'use client';
 
-import { WalletModal } from '@/components/Navbar';
-import { useAccount, useBalance, useNetwork } from '@starknet-react/core';
+import Cyberpunk from '../../../public/cyberpunk.jpg';
+import Image from 'next/image';
+import Navbar, { WalletModal } from '@/components/Navbar';
+import { useAccount } from '@starknet-react/core';
 
-function Portfolio() {
-  const { address } = useAccount();
-  const { isLoading, isError, error, data } = useBalance({
-    address,
-    watch: true,
-  });
+type Strat = {
+  name: string;
+};
 
-  const { chain } = useNetwork();
-
-  if (isLoading) return <div>Loading ...</div>;
-  if (isError || !data) return <div>{error?.message}</div>;
-
+function Portfolio(strat: Strat) {
   return (
     <div className="z-10 flex flex-col w-3/4">
       <div className="items-stretch">
-        <h1 className="text-4xl p-4 ">My portfolio</h1>
+        <h1 className="text-4xl p-4 ">My position</h1>
         <div className="stats w-full shadow  text-primary-content ">
           <div className="stat ">
             <div className="stat-figure text-secondary">
@@ -39,11 +34,7 @@ function Portfolio() {
               </svg>
             </div>
             <div className="stat-title ">Value</div>
-            <div className="stat-value">
-              {data.formatted.toString().slice(0, 7)}
-              {data.symbol}
-            </div>
-            <div className="stat-desc">USD VALUE</div>
+            <div className="stat-value">31K</div>
           </div>
 
           <div className="stat">
@@ -63,53 +54,46 @@ function Portfolio() {
   );
 }
 
-function StratList() {
+function StratDetails(strat: Strat) {
+  const subtitleStyle = 'text-3xl text-primary';
+
   return (
     <div className="z-10 flex flex-col w-3/4">
       <div className="items-stretch">
-        <h1 className="text-4xl pl-4">My strategies</h1>
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="text-xl text-white">
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Current Yield</th>
-              <th>Rewards</th>
-            </tr>
-          </thead>
-          <tbody className="text-3xl">
-            {/* row 1 */}
-            <tr>
-              <td>EtherFi Juice</td>
-              <td>2.4 ETH</td>
-              <td>2.5 %</td>
-              <td>0.26 ETH</td>
-            </tr>
-
-            <tr>
-              <td>Combo Juice</td>
-              <td>1.3 ETH</td>
-              <td>4 %</td>
-              <td>0.2 ETH</td>
-            </tr>
-          </tbody>
-        </table>
+        <h1 className="text-4xl p-4 ">Strategy</h1>
+        <div className="flex flex-row px-4">
+          <div className="w-1/2">
+            <div className={subtitleStyle}>Description</div>
+            <div className="text-lg mt-4">lorem ipsum dolor sit amet</div>
+          </div>
+          <div className="w-1/2">
+            <div className={subtitleStyle}>Invest</div>
+            <div className="flex flex-row justify-around mt-4">
+              <button className="btn w-1/3 text-lg">Deposit</button>
+              <button className="btn w-1/3 text-lg">Withdraw</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default function Dashboard() {
+export default function Strategy(strat: Strat) {
   const { address } = useAccount();
+
+  const defaultStratProps: Strat = {
+    name: 'Example Strategy',
+  };
+  const combined = { ...defaultStratProps, ...strat };
   return (
     <>
       {address ? (
         <div className="z-10 w-full flex flex-col items-center">
-          <Portfolio />
-          <div className="divider divider-primary z-40 w-3/4 m-auto my-12"></div>
-
-          <StratList />
+          <h1 className="text-7xl font-extrabold mb-3">COMBO JUICE</h1>
+          <Portfolio {...combined} />
+          <div className="divider divider-primary w-3/4 m-auto mt-6"></div>
+          <StratDetails {...combined} />
         </div>
       ) : (
         <div className="z-10 flex flex-col items-center">

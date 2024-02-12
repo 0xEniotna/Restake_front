@@ -4,6 +4,7 @@ import { useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 
 type YieldProps = {
   protocol: string;
@@ -70,6 +71,8 @@ export default function Yield() {
     }
   };
 
+  const router = useRouter();
+
   const subTitleStyle = 'text-5xl font-extrabold text-left font-roboto ml-4';
 
   return (
@@ -98,18 +101,27 @@ export default function Yield() {
           ref={nextSectionRef}
           id="nextSection"
         >
-          <div className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110">
-            <div className={subTitleStyle}>Combo 🤝</div>
+          <button
+            type="button"
+            onClick={() => router.push('/strategies/combo')}
+            className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+            disabled
+          >
+            <div className={subTitleStyle}>Combo Juice 🤝</div>
             <div className="divider"></div>
 
             <div>
               <YieldObject {...defaultYieldProps} />
             </div>
-          </div>
-          <div className="divider divider-primary"></div>
+          </button>
+          {/* <div className="divider divider-primary"></div> */}
 
-          <div className="flex flex-row space-x-4">
-            <div className="backdrop-blur-sm flex-grow transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110">
+          <div className="flex flex-row justify-between">
+            <button
+              type="button"
+              onClick={() => router.push('/strategies/etherfi')}
+              className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+            >
               <div className="flex flex-row items-center ml-2">
                 <Image
                   src="https://raw.githubusercontent.com/etherfi-protocol/.github/27afd23376008f849a997fca3257031fe2e01d56/etherfi-logo.svg"
@@ -118,7 +130,7 @@ export default function Yield() {
                   height={50}
                 />
                 <div className={subTitleStyle}>
-                  <p>EtherFi eETH</p>
+                  <p>EtherFi Juice</p>
                 </div>
               </div>
               <div className="divider"></div>
@@ -126,22 +138,26 @@ export default function Yield() {
                 {/* Correctly pass custom props */}
                 <YieldObject {...etherFiYieldProps} />
               </div>
-            </div>
-            <div className="divider divider-horizontal divider-primary"></div>
+            </button>
 
-            <div className="backdrop-blur-sm flex-grow transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110">
+            <button
+              type="button"
+              onClick={() => router.push('/strategies/kelp')}
+              className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+              disabled
+            >
+              {' '}
               <div className="flex flex-row content-center">
                 <div className={subTitleStyle}>
-                  <p>KelpDAO rsETH</p>
+                  <p>KelpDAO Juice</p>
                 </div>
               </div>
               <div className="divider"></div>
-
               <div>
                 {/* Correctly pass custom props */}
                 <YieldObject {...kelpDAoYieldProps} />
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>

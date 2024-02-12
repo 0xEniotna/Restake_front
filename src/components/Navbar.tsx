@@ -1,7 +1,12 @@
 'use client';
-import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
+import {
+  Connector,
+  useAccount,
+  useConnect,
+  useDisconnect,
+} from '@starknet-react/core';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 function WalletConnected() {
@@ -46,6 +51,27 @@ function WalletConnected() {
 
 function ConnectWallet() {
   const { connectors, connect } = useConnect();
+  const { address, isConnecting } = useAccount();
+  const [error, setError] = useState('');
+
+  // Save to local storage when address changes
+  useEffect(() => {
+    if (address) {
+      localStorage.setItem('connectedAddress', address);
+    }
+  }, [address]);
+
+  const handleConnect = (connector: Connector) => {
+    setError('');
+
+    try {
+      connect({ connector });
+      // Additional logic for successful connection
+    } catch (error: any) {
+      // Handle errors
+      setError('Failed to connect: ' + error.message);
+    }
+  };
 
   return (
     <div className="text-center text-2xl">
@@ -54,17 +80,19 @@ function ConnectWallet() {
         {connectors.map((connector) => (
           <button
             key={connector.id}
-            onClick={() => connect({ connector })}
+            onClick={() => handleConnect(connector)}
             className="flex hover:bg-secondary hover:text-primary justify-center items-center text-center gap-x-2 bg-primary text-secondary font-bold py-2 px-4 rounded transition duration-150 ease-in-out w-full"
           >
-            {connector.id.charAt(0).toUpperCase() + connector.id.slice(1)}
+            {isConnecting
+              ? `Connecting...`
+              : connector.id.charAt(0).toUpperCase() + connector.id.slice(1)}
           </button>
         ))}
       </div>
     </div>
   );
 }
-function WalletModal() {
+export function WalletModal() {
   const showModal = () => {
     const modal = document.getElementById('my_modal');
     if (modal instanceof HTMLDialogElement) {
@@ -104,23 +132,24 @@ function WalletModal() {
 
 export default function Navbar() {
   const { address } = useAccount();
-  const router = useRouter();
+
+  const linkStyle = 'hover:text-primary btn btn-ghost text-xl ';
 
   return (
     <div className="navbar backdrop-blur-md h-18">
       <div className="navbar-start">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost text-5xl">
-            ReSta(r)ke
+            Juice Fountain
           </Link>
         </div>
       </div>
       <div className="navbar-center  lg:flex">
-        <ul className="menu menu-horizontal px-1 text-xl">
-          <li>
+        <ul className="menu menu-horizontal px-1 text-xl ">
+          <li className={linkStyle}>
             <Link href="/dashboard">Dashboard</Link>
           </li>
-          <li>
+          <li className={linkStyle}>
             <Link href="/markets">Markets</Link>
           </li>
         </ul>

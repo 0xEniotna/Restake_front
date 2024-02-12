@@ -5,7 +5,10 @@ export default function Nimbora() {
     <div className="z-1 backdrop-blur-sm w-3/4 p-6 mt-12 flex flex-col items-center">
       <div className="flex flex-row">
         <div className="flex text-3xl">Built with</div>
-        <a className="flex text-3xl ml-2 mr-44" href="https://www.nimbora.io/">
+        <a
+          className="flex text-3xl ml-2 mr-44 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 hover:text-primary"
+          href="https://www.nimbora.io/"
+        >
           NIMBORA
         </a>
       </div>

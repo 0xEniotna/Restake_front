@@ -6,23 +6,43 @@ import Navbar from '@/components/Navbar';
 
 export default function Markets() {
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen gap-12">
-      <Image
-        alt="Cyberpunk theme"
-        src={Cyberpunk}
-        placeholder="blur"
-        quality={100}
-        fill
-        sizes="100vw"
-        style={{
-          objectFit: 'cover',
-          zIndex: 0,
-          opacity: 0.6,
-        }}
-      />
-      <div className="absolute top-0 w-full">
-        <Navbar />
+    <>
+      <div className="overflow-x-auto w-4/5 z-40">
+        <div>
+          <h1 className="text-8xl p-4 text-white">Markets</h1>
+          <h2 className="text-4xl p-4 text-white">All available strategies</h2>
+        </div>
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr className="text-xl text-white">
+              <th>Name</th>
+              <th>TVL</th>
+              <th>Current Yield</th>
+            </tr>
+          </thead>
+          <tbody className="text-3xl">
+            {/* row 1 */}
+            <tr>
+              <td>EtherFi Juice</td>
+              <td>163 ETH</td>
+              <td>2.5 %</td>
+            </tr>
+            {/* row 2 */}
+            <tr>
+              <td>Kelp Juice</td>
+              <td>134 ETH</td>
+              <td>2.67 %</td>
+            </tr>
+            {/* row 3 */}
+            <tr>
+              <td>Combo Juice</td>
+              <td>260 ETH</td>
+              <td>4 %</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </main>
+    </>
   );
 }
