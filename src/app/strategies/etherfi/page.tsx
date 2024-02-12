@@ -119,7 +119,7 @@ function StratDetails(strat: Strat) {
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
-              EtherFi's eETH.
+              EtherFi&apos;s eETH.
             </div>
           </div>
           <div className="w-1/2">
@@ -167,12 +167,6 @@ export default function Strategy() {
     userBalance: balance,
     isBalanceLoading: isBalanceLoading,
   };
-
-  // const portfolioProps: PortfolioProps = {
-  //   tokenAddress: lstETHStrategy,
-  //   userBalance: balance,
-  //   isLoading: isBalanceLoading,
-  // };
 
   return (
     <>
