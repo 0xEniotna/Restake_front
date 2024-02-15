@@ -53,9 +53,9 @@ function Portfolio() {
           </div>
 
           <div className="stat">
-            <div className="stat-title">New Registers</div>
-            <div className="stat-value">1,200</div>
-            <div className="stat-desc">↘︎ 90 (14%)</div>
+            <div className="stat-title">Deposited assets</div>
+            <div className="stat-value">8,200</div>
+            <div className="stat-desc">↗Eth equivalent 3.2 ETH</div>
           </div>
         </div>
       </div>
@@ -79,15 +79,13 @@ function StratList() {
             </tr>
           </thead>
           <tbody className="text-3xl">
-            {/* row 1 */}
-            <tr>
+            <tr className="">
               <td>EtherFi Juice</td>
               <td>2.4 ETH</td>
               <td>2.5 %</td>
               <td>0.26 ETH</td>
             </tr>
-
-            <tr>
+            <tr className="">
               <td>Combo Juice</td>
               <td>1.3 ETH</td>
               <td>4 %</td>

@@ -25,7 +25,7 @@ function WalletConnected() {
   return (
     <div className="tooltip tooltip-bottom" data-tip="Disconnect">
       <button
-        className="btn flex flex-row items-center"
+        className="btn flex flex-row items-center bg-primary text-secondary"
         onClick={() => handleDisconnect()}
       >
         <div className="flex flex-row items-center gap-2 text-xl">

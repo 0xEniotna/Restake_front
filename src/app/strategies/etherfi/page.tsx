@@ -114,8 +114,8 @@ function StratDetails(strat: Strat) {
     <div className="z-10 flex flex-col w-3/4">
       <div className="items-stretch">
         <h1 className="text-4xl p-4 ">Strategy</h1>
-        <div className="flex flex-row px-4">
-          <div className="w-1/2">
+        <div className="flex flex-row px-4 space-x-2">
+          <div className="w-1/2 border-r">
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
@@ -124,9 +124,10 @@ function StratDetails(strat: Strat) {
               EigenLayer Points.
             </div>
           </div>
-          <div className="w-1/2">
+
+          <div className="w-1/2 ">
             <div className={subtitleStyle}>Invest</div>
-            <div className="flex flex-row justify-around mt-4">
+            <div className="flex flex-row justify-around mt-4 space-x-2">
               <DepositModal {...params} />
               <WithdrawModal {...withdrawParams} />
             </div>
@@ -143,7 +144,7 @@ export default function Strategy() {
 
   const network = useNetwork();
   const configs: Configs = configData;
-  const { lstETHStrategy, eth, lstETHStrategyToken } =
+  const { eETHJuiceStrategy, eth, eETHJuiceStrategyToken } =
     configs[network.chain.network];
 
   const {
@@ -152,7 +153,7 @@ export default function Strategy() {
     isLoading: isBalanceLoading,
     error,
   } = useUserPosition({
-    contractAddress: lstETHStrategyToken,
+    contractAddress: eETHJuiceStrategyToken,
   });
 
   useEffect(() => {
@@ -163,8 +164,8 @@ export default function Strategy() {
 
   const stratProps: Strat = {
     name: 'EtherFi Juice',
-    address: lstETHStrategy,
-    shareToken: lstETHStrategyToken,
+    address: eETHJuiceStrategy,
+    shareToken: eETHJuiceStrategyToken,
     underlying: eth,
     userBalance: balance,
     isBalanceLoading: isBalanceLoading,

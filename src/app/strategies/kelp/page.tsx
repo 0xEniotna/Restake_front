@@ -119,7 +119,9 @@ function StratDetails(strat: Strat) {
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
-              KelpDAO&apos;s rsETH.
+              EtherFi&apos;s eETH. Holding eETH makes you earn restaking native
+              APR and additional rewards such as EtherFi loyalty points or
+              EigenLayer Points.
             </div>
           </div>
           <div className="w-1/2">
@@ -141,7 +143,7 @@ export default function Strategy() {
 
   const network = useNetwork();
   const configs: Configs = configData;
-  const { lstETHStrategy, eth, lstETHStrategyToken } =
+  const { eETHJuiceStrategy, eth, eETHJuiceStrategyToken } =
     configs[network.chain.network];
 
   const {
@@ -150,7 +152,7 @@ export default function Strategy() {
     isLoading: isBalanceLoading,
     error,
   } = useUserPosition({
-    contractAddress: lstETHStrategyToken,
+    contractAddress: eETHJuiceStrategyToken,
   });
 
   useEffect(() => {
@@ -161,8 +163,8 @@ export default function Strategy() {
 
   const stratProps: Strat = {
     name: 'KelpDAO Juice',
-    address: lstETHStrategy,
-    shareToken: lstETHStrategyToken,
+    address: eETHJuiceStrategy,
+    shareToken: eETHJuiceStrategyToken,
     underlying: eth,
     userBalance: balance,
     isBalanceLoading: isBalanceLoading,

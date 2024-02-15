@@ -116,11 +116,11 @@ export default function Yield() {
           </button>
           {/* <div className="divider divider-primary"></div> */}
 
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row w-full items-stretch space-x-2">
             <button
               type="button"
               onClick={() => router.push('/strategies/etherfi')}
-              className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+              className="w-full backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
             >
               <div className="flex flex-row items-center ml-2">
                 <Image
@@ -143,7 +143,7 @@ export default function Yield() {
             <button
               type="button"
               onClick={() => router.push('/strategies/kelp')}
-              className="backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
+              className="w-full backdrop-blur-sm mt-6 transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 border border-primary rounded-xl p-3"
               disabled
             >
               {' '}

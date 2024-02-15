@@ -1,8 +1,10 @@
 'use client';
 
-import { WalletModal } from '@/components/Navbar';
+import Cyberpunk from '../../../public/cyberpunk.jpg';
+import Image from 'next/image';
+import Navbar, { WalletModal } from '@/components/Navbar';
 import { useAccount, useBalance, useNetwork } from '@starknet-react/core';
-import { depositProps } from '@/hooks/Deposit';
+import useDeposit, { depositProps } from '@/hooks/Deposit';
 import { Configs } from '@/utils';
 import configData from '@/configs.json';
 import { DepositModal } from '@/components/DepositModal';
@@ -117,7 +119,9 @@ function StratDetails(strat: Strat) {
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
-              EtherFi&apos;s eETH.
+              EtherFi&apos;s eETH. Holding eETH makes you earn restaking native
+              APR and additional rewards such as EtherFi loyalty points or
+              EigenLayer Points.
             </div>
           </div>
           <div className="w-1/2">
@@ -139,7 +143,7 @@ export default function Strategy() {
 
   const network = useNetwork();
   const configs: Configs = configData;
-  const { lstETHStrategy, eth, lstETHStrategyToken } =
+  const { eETHJuiceStrategy, eth, eETHJuiceStrategyToken } =
     configs[network.chain.network];
 
   const {
@@ -148,7 +152,7 @@ export default function Strategy() {
     isLoading: isBalanceLoading,
     error,
   } = useUserPosition({
-    contractAddress: lstETHStrategyToken,
+    contractAddress: eETHJuiceStrategyToken,
   });
 
   useEffect(() => {
@@ -158,9 +162,9 @@ export default function Strategy() {
   }, [data, isBalanceLoading]);
 
   const stratProps: Strat = {
-    name: 'EtherFi Juice',
-    address: lstETHStrategy,
-    shareToken: lstETHStrategyToken,
+    name: 'Combo Juice',
+    address: eETHJuiceStrategy,
+    shareToken: eETHJuiceStrategyToken,
     underlying: eth,
     userBalance: balance,
     isBalanceLoading: isBalanceLoading,

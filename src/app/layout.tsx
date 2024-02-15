@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={iceberg.className}>
         <StarknetProvider>
           <main className="relative flex flex-col items-center justify-center min-h-screen gap-12">
-            <Image
+            {/* <Image
               alt="Cyberpunk theme"
               src={Cyberpunk}
               placeholder="blur"
@@ -41,7 +41,7 @@ export default function RootLayout({
                 zIndex: 0,
                 opacity: 0.6,
               }}
-            />
+            /> */}
             <div className="absolute z-20 top-0 w-full">
               <Navbar />
             </div>
