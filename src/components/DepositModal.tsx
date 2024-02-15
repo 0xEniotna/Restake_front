@@ -109,6 +109,12 @@ export function DepositModal(depositProps: depositProps) {
     setShowToast(false);
   };
 
+  const maxDeposit = () => {
+    if (bal) {
+      setAmount(bal.formatted.toString());
+    }
+  };
+
   return (
     <>
       <button
@@ -131,7 +137,7 @@ export function DepositModal(depositProps: depositProps) {
                   <span className="loading loading-spinner text-primary"></span>
                 ) : (
                   bal && (
-                    <div>
+                    <div onClick={maxDeposit} className="hover:cursor-pointer">
                       Balance: {bal.formatted.toString().slice(0, 7)}
                       {bal.symbol}
                     </div>

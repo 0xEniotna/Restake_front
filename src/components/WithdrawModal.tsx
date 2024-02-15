@@ -152,6 +152,12 @@ export function WithdrawModal(withdrawProps: withdrawModalProps) {
     amount: amount,
   });
 
+  const withdrawMax = () => {
+    if (withdrawProps.userBalance) {
+      setAmount(ethers.formatEther(withdrawProps.userBalance.toString()));
+    }
+  };
+
   return (
     <>
       <button
@@ -185,7 +191,10 @@ export function WithdrawModal(withdrawProps: withdrawModalProps) {
               <span className="label-text text-secondary">
                 Amount to Withdraw
               </span>
-              <div className="label-text text-secondary">
+              <div
+                className="label-text text-secondary hover:cursor-pointer"
+                onClick={withdrawMax}
+              >
                 {!withdrawProps.isBalanceLoading &&
                 withdrawProps.userBalance ? (
                   `${ethers

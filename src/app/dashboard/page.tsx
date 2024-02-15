@@ -21,6 +21,19 @@ function Portfolio() {
         <h1 className="text-4xl p-4 ">My portfolio</h1>
         <div className="stats w-full shadow  text-primary-content ">
           <div className="stat ">
+            <div className="stat-title ">Value</div>
+            <div className="stat-value">
+              {/* {data.formatted.toString().slice(0, 7)}
+              {data.symbol} */}
+              3.7 ETH
+            </div>
+            <div className="stat-desc">USD ~ 9200$</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-title">PNL</div>
+            <div className="stat-value">1000</div>
+            <div className="stat-desc">↗︎ 12 % </div>
             <div className="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,24 +51,29 @@ function Portfolio() {
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
               </svg>
             </div>
-            <div className="stat-title ">Value</div>
-            <div className="stat-value">
-              {data.formatted.toString().slice(0, 7)}
-              {data.symbol}
-            </div>
-            <div className="stat-desc">USD VALUE</div>
-          </div>
-
-          <div className="stat">
-            <div className="stat-title">PNL</div>
-            <div className="stat-value">4,200</div>
-            <div className="stat-desc">↗︎ 400 (12%)</div>
           </div>
 
           <div className="stat">
             <div className="stat-title">Deposited assets</div>
             <div className="stat-value">8,200</div>
             <div className="stat-desc">↗Eth equivalent 3.2 ETH</div>
+            <div className="stat-figure text-secondary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="feather feather-dollar-sign"
+              >
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
