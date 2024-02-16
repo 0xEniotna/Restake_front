@@ -209,9 +209,13 @@ export default function Strategy() {
     <>
       {address ? (
         <div className="z-10 w-full flex flex-col items-center p-24">
-          <h1 className="text-7xl font-extrabold mb-3">
-            {stratProps.name.toUpperCase()}
-          </h1>
+          <div className="">
+            <h1 className="text-7xl font-extrabold mb-3">
+              {stratProps.name.toUpperCase()}
+            </h1>
+            <p className="text-sm"> {eETHJuiceStrategy}</p>
+          </div>
+
           <Portfolio {...stratProps} />
           <div className="divider divider-primary w-3/4 m-auto mt-6"></div>
           <StratDetails {...stratProps} />
