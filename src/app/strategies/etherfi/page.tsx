@@ -114,8 +114,20 @@ function StratDetails(strat: Strat) {
     <div className="z-10 flex flex-col w-3/4">
       <div className="items-stretch">
         <h1 className="text-4xl p-4 ">Strategy</h1>
-        <div className="flex flex-row px-4 space-x-2">
-          <div className="w-1/2 border-r">
+        <div className="w-full ml-4">
+          <div className={subtitleStyle}>Invest</div>
+
+          <div className="flex flex-row justify-around mt-4 ml-4 space-x-2">
+            <DepositModal {...params} />
+            <WithdrawModal {...withdrawParams} />
+          </div>
+        </div>
+        <div className="divider divider-primary w-full m-auto mt-6"></div>
+
+        <h1 className="text-4xl p-4 ">About</h1>
+
+        <div className="flex flex-row px-4 mt-4 justify-between">
+          <div className="w-1/2 ">
             <div className={subtitleStyle}>Description</div>
             <div className="text-lg mt-4">
               This strategy is a simple example strategy that buys and holds
@@ -124,12 +136,34 @@ function StratDetails(strat: Strat) {
               EigenLayer Points.
             </div>
           </div>
-
-          <div className="w-1/2 ">
-            <div className={subtitleStyle}>Invest</div>
-            <div className="flex flex-row justify-around mt-4 space-x-2">
-              <DepositModal {...params} />
-              <WithdrawModal {...withdrawParams} />
+          <div className="w-1/2 text-right">
+            <h3 className={subtitleStyle}>APR</h3>
+            <div className="flex justify-end">
+              <div className="mr-4">
+                <p className="font-bold">Last 7 days</p>
+                <p className="text-3xl font-bold">19,18%</p>
+              </div>
+              <div className="mr-4">
+                <p className="font-bold">Last 30 days</p>
+                <p className="text-3xl font-bold">14,38%</p>
+              </div>
+              <div>
+                <p className="font-bold">Inception</p>
+                <p className="text-3xl font-bold">1,18%</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-2">Fees</h3>
+              <div className="flex justify-end">
+                <div className="mr-4">
+                  <p className="font-bold">Management</p>
+                  <p className="text-3xl font-bold">0%</p>
+                </div>
+                <div>
+                  <p className="font-bold">Performance</p>
+                  <p className="text-3xl font-bold">0.3%</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -174,7 +208,7 @@ export default function Strategy() {
   return (
     <>
       {address ? (
-        <div className="z-10 w-full flex flex-col items-center">
+        <div className="z-10 w-full flex flex-col items-center p-24">
           <h1 className="text-7xl font-extrabold mb-3">
             {stratProps.name.toUpperCase()}
           </h1>
